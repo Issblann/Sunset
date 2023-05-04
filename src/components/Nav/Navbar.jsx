@@ -15,7 +15,7 @@ function Navbar() {
           <div className="navbar">
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <a href="Home">Home</a>
               </li>
               <li>
                 <a href="News">News</a>

@@ -25,7 +25,7 @@
 .container-title-subtitle h1 {
   font-weight: 700;
   font-size: 5.625rem;
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 .container-title-subtitle p {
   font-weight: 400;
