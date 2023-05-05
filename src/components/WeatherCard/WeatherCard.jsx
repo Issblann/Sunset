@@ -56,7 +56,7 @@ function WeatherCard({ city }) {
         setLoading(false);
       });
   };
-  console.log(import.meta.env.VITE_APP_API_KEY);
+
   useEffect(() => {
     getWeather();
   }, [city]);
