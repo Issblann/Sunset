@@ -6,7 +6,7 @@
   justify-content: center;
   background: var(--second-color);
   gap: 40px;
-  padding: 120px 55px;
+  padding: 220px 55px;
 }
 
 .container-title-subtitle {
@@ -58,4 +58,19 @@
 .container-searchicon {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 640px) {
+  .container-title-subtitle h1 {
+    font-size: 35px;
+  }
+  .container-title-subtitle p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 161px 31px;
+  }
 }

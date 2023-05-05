@@ -11,8 +11,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/section-weather" element={<SectionWeather />}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/section-weather/:city" element={<SectionWeather />} />
         </Routes>
       </BrowserRouter>
     </ContextProvider>

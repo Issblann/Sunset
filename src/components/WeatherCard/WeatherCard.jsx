@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../context/Context";
 import "./WeatherCard.css";
-import SearchIconCard from "../../images/weathercard/SearchIconCard";
 import UbicationIconCard from "../../images/weathercard/UbicationIconCard";
 import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import Spinner from "../Spinner/Spinner";
@@ -22,54 +21,41 @@ function WeatherCard() {
   const dayOfWeekString = daysOfWeek[today.getDay()];
   const monthName = today.toLocaleString("en-US", { month: "long" });
 
-  const { city, setCity, loading, setLoading, error, setError, data, setData } =
+  const { city, loading, setLoading, setError, error, data, setData } =
     useContext(Context);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (city === "" || !city) return;
-    getWeather(city.trim());
-  };
-
-  const getWeather = () => {
-    setError(null);
+  useEffect(() => {
+    setData(null);
     setLoading(true);
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
-    )
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("City not found");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setData(data);
-        localStorage.setItem("city", JSON.stringify(city));
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-        alert("Enter an available location.");
-      })
-      .finally(() => setLoading(false));
-  };
+    setError(null);
+    const getWeather = () => {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
+      )
+        .then((res) => {
+          if (!res.ok) {
+            console.log(error);
+            // throw new Error("City not found");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setData(data);
+          localStorage.setItem("city", JSON.stringify(city));
+        })
+        .catch((error) => {
+          setError(error);
+          console.log(error);
+        })
+        .finally(() => setLoading(false));
+    };
+    getWeather();
+  }, [city, setLoading, setError, setData]);
+
   return (
     <>
-      <section>
-        <div className="search-weather">
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Location Search"
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <span type="submit">
-              <SearchIconCard />
-            </span>
-          </form>
-        </div>
+      <section className="section-weathercard">
         <div className="weather-container">
           {loading && <Spinner />}
           {data && (
