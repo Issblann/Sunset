@@ -29,7 +29,9 @@ function WeatherCard({ city }) {
     setLoading(true);
     setError(null);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
+        import.meta.env.VITE_APP_API_KEY
+      }&lang=en`
     )
       .then((res) => {
         if (!res.ok) {
