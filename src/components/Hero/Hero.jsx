@@ -1,6 +1,4 @@
-import SearchIconHero from "../../images/hero/SearchIconHero";
 import "./hero.css";
-import { Link } from "react-router-dom";
 import SectionWeather from "../../Pages/SectionWeather";
 
 function hero() {

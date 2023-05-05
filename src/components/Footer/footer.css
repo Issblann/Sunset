@@ -1,0 +1,30 @@
+footer {
+  width: 100%;
+  background: var(--text-color);
+  color: var(--primary-color);
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+}
+.social-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 113px;
+}
+.social-links img {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  footer {
+    flex-wrap: wrap;
+    text-align: left;
+    flex-direction: column-reverse;
+  }
+  .social-links {
+    margin: unset;
+  }
+}

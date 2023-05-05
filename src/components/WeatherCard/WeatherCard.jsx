@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../context/Context";
 import "./WeatherCard.css";
-import SearchIconCard from "../../images/weathercard/SearchIconCard";
 import UbicationIconCard from "../../images/weathercard/UbicationIconCard";
 import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import Spinner from "../Spinner/Spinner";
 import icons from "../../images/icons-weather/icons";
 
-function WeatherCard() {
+function WeatherCard({ city }) {
   const today = new Date();
   const day = today.getDate();
   const daysOfWeek = [
@@ -22,23 +21,23 @@ function WeatherCard() {
   const dayOfWeekString = daysOfWeek[today.getDay()];
   const monthName = today.toLocaleString("en-US", { month: "long" });
 
-  const { city, setCity, loading, setLoading, error, setError, data, setData } =
+  const { loading, setLoading, setError, error, data, setData } =
     useContext(Context);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (city === "" || !city) return;
-    getWeather(city.trim());
-  };
+  // const key = import.meta.env.VITE_APP_API_KEY;
 
   const getWeather = () => {
-    setError(null);
+    setData(null);
     setLoading(true);
+    setError(null);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
+        import.meta.env.VITE_APP_API_KEY
+      }&lang=en`
     )
       .then((res) => {
         if (!res.ok) {
+          console.log(error);
           throw new Error("City not found");
         }
         return res.json();
@@ -49,27 +48,22 @@ function WeatherCard() {
         localStorage.setItem("city", JSON.stringify(city));
       })
       .catch((error) => {
-        console.log(error);
         setError(error);
         alert("Enter an available location.");
+        console.log(error);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   };
+  console.log(import.meta.env.VITE_APP_API_KEY);
+  useEffect(() => {
+    getWeather();
+  }, [city]);
+
   return (
     <>
-      <section>
-        <div className="search-weather">
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Location Search"
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <span type="submit">
-              <SearchIconCard />
-            </span>
-          </form>
-        </div>
+      <section className="section-weathercard">
         <div className="weather-container">
           {loading && <Spinner />}
           {data && (
