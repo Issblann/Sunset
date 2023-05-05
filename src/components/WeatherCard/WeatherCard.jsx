@@ -24,6 +24,8 @@ function WeatherCard({ city }) {
   const { loading, setLoading, setError, error, data, setData } =
     useContext(Context);
 
+  // const key = import.meta.env.VITE_APP_API_KEY;
+
   const getWeather = () => {
     setData(null);
     setLoading(true);
@@ -54,7 +56,7 @@ function WeatherCard({ city }) {
         setLoading(false);
       });
   };
-
+  console.log(import.meta.env.VITE_APP_API_KEY);
   useEffect(() => {
     getWeather();
   }, [city]);
