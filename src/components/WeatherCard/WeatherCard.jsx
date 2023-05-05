@@ -6,7 +6,7 @@ import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import Spinner from "../Spinner/Spinner";
 import icons from "../../images/icons-weather/icons";
 
-function WeatherCard() {
+function WeatherCard({ city }) {
   const today = new Date();
   const day = today.getDate();
   const daysOfWeek = [
@@ -21,37 +21,41 @@ function WeatherCard() {
   const dayOfWeekString = daysOfWeek[today.getDay()];
   const monthName = today.toLocaleString("en-US", { month: "long" });
 
-  const { city, loading, setLoading, setError, error, data, setData } =
+  const { loading, setLoading, setError, error, data, setData } =
     useContext(Context);
 
-  useEffect(() => {
+  const getWeather = () => {
     setData(null);
     setLoading(true);
     setError(null);
-    const getWeather = () => {
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
-      )
-        .then((res) => {
-          if (!res.ok) {
-            console.log(error);
-            // throw new Error("City not found");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setData(data);
-          localStorage.setItem("city", JSON.stringify(city));
-        })
-        .catch((error) => {
-          setError(error);
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=daafdbccc42b8ba1305112f12e6b508f&lang=en`
+    )
+      .then((res) => {
+        if (!res.ok) {
           console.log(error);
-        })
-        .finally(() => setLoading(false));
-    };
+          throw new Error("City not found");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setData(data);
+        localStorage.setItem("city", JSON.stringify(city));
+      })
+      .catch((error) => {
+        setError(error);
+        alert("Enter an available location.");
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
     getWeather();
-  }, [city, setLoading, setError, setData]);
+  }, [city]);
 
   return (
     <>

@@ -3,6 +3,9 @@
   background: var(--primary-color);
   height: 286px;
   padding: 60px 20px;
+  justify-content: center;
+  display: flex;
+  overflow-x: hidden;
 }
 
 .sub-container-flags {
@@ -16,9 +19,20 @@
   border-top: solid 1px #d8d8d8;
   border-bottom: solid 1px #d8d8d8;
 }
+.slick-slider {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.slick-list {
+  display: flex;
+  justify-content: center;
+}
 
 .flag-and-description {
-  display: flex;
+  display: flex !important ;
+  width: 20px;
+  justify-content: center;
   align-items: center;
   gap: 10px;
 }

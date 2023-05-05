@@ -6,7 +6,6 @@ function ContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [city, setCity] = useState("");
-  const [show, setShow] = useState(false);
 
   return (
     <Context.Provider
@@ -19,8 +18,6 @@ function ContextProvider({ children }) {
         setError,
         city,
         setCity,
-        show,
-        setShow,
       }}
     >
       {children}

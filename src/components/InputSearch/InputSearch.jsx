@@ -1,20 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./InputSearch.css";
-// import { Context } from "../../context/Context";
+import { Context } from "../../context/Context";
 import { BiSearch } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const InputSearch = () => {
-  // const { city, setCity } = useContext(Context);
-  const [city, setCity] = useState("");
+  const { city, setCity, setData } = useContext(Context);
+  const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log({ city });
-    city.trim();
+    // setData(null);
+    setCity(city.trim());
     if (city === "" || !city) return;
-    window.location.href = `/section-weather/${city}`;
+    setCity("");
+    navigate(`/section-weather/${city}`);
   };
 
-  console.log();
   return (
     <>
       <div className="search-container">
@@ -24,8 +25,8 @@ const InputSearch = () => {
             type="text"
             placeholder="Search"
             onChange={(e) => setCity(e.target.value)}
+            value={city}
           />
-          {/* <BiSearch/> */}
         </form>
       </div>
     </>
