@@ -74,6 +74,7 @@ const Flags = () => {
     slidesToShow: 5,
     slidesToScroll: 2,
     autoplaySpeed: 3500,
+    pauseOnHover: false,
     cssEase: "ease-in-out",
     responsive: [
       {
