@@ -41,7 +41,6 @@ function WeatherCard({ city }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setData(data);
         localStorage.setItem("city", JSON.stringify(city));
       })
