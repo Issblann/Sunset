@@ -96,6 +96,9 @@ nav {
     display: none;
     top: -490px;
   }
+  input:focus {
+    outline: none;
+  }
 
   @media (max-width: 640px) {
     .navbar {
