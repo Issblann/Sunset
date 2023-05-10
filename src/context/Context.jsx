@@ -6,6 +6,7 @@ function ContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [city, setCity] = useState("");
+  const [location, setLocation] = useState({ lat: 0, lon: 0 });
 
   return (
     <Context.Provider
@@ -18,6 +19,8 @@ function ContextProvider({ children }) {
         setError,
         city,
         setCity,
+        location,
+        setLocation,
       }}
     >
       {children}

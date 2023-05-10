@@ -3,9 +3,9 @@ import ContactForm from "../components/ContactForm/ContactForm";
 import Flags from "../components/Flags/Flags";
 import Hero from "../components/Hero/Hero";
 import TeamSection from "../components/Team/Team";
-import WeatherCard from "../components/WeatherCard/WeatherCard";
 import WeatherCardGeolocation from "../components/WeatherCardGeolocation/WeatherCardGeolocation";
 function Home() {
+  window.scrollTo(0, 0);
   return (
     <>
       <Hero />

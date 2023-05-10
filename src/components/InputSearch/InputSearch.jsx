@@ -9,8 +9,7 @@ const InputSearch = () => {
   const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
-    // setData(null);
-    setCity(city.trim());
+    setCity(city.toLowerCase().trim());
     if (city === "" || !city) return;
     setCity("");
     navigate(`/section-weather/${city}`);

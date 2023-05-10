@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UbicationIconCard from "../../images/weathercard/UbicationIconCard";
 import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import icons from "../../images/icons-weather/icons";
+import MapGeolocation from "../MapGeolocation/MapGeolocation";
 import "./weatherCardGeolocation.css";
+import { Context } from "../../context/Context";
 
 const WeatherCardGeolocation = () => {
   const today = new Date();
@@ -21,7 +23,9 @@ const WeatherCardGeolocation = () => {
   const monthName = today.toLocaleString("en-US", { month: "long" });
 
   const [data, setData] = useState(null);
+  const { location, setLocation } = useContext(Context);
 
+  console.log("location", location);
   useEffect(() => {
     const options = {
       enableHighAccuracy: true,
@@ -31,12 +35,19 @@ const WeatherCardGeolocation = () => {
 
     const success = (pos) => {
       const crd = pos.coords;
-
-      const dataWeather = {
+      localStorage.setItem(
+        "coordenadas",
+        JSON.stringify({
+          lat: crd.latitude,
+          lon: crd.longitude,
+        })
+      );
+      setLocation({
         lat: crd.latitude,
-        lot: crd.longitude,
-      };
-      setData(dataWeather);
+        lon: crd.longitude,
+      });
+
+      setData(location);
 
       axios
         .get(
@@ -70,7 +81,7 @@ const WeatherCardGeolocation = () => {
                 <div className="location-container">
                   <UbicationIconCard />
                   <p>
-                    {data.name},<span>{data.sys.country}</span>
+                    {data.name}, <span>{data.sys.country}</span>
                   </p>
                 </div>
                 <div className="day-container">

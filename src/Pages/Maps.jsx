@@ -1,7 +1,7 @@
 import React from "react";
-
+import MapContainer from "../components/MapGeolocation/MapGeolocation";
 const Maps = () => {
-  return <div>Maps</div>;
+  return <MapContainer />;
 };
 
 export default Maps;

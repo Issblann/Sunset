@@ -6,6 +6,7 @@ import SectionWeather from "./Pages/SectionWeather";
 import ContextProvider from "./context/Context";
 import "./styles/global/colors.css";
 import Footer from "./components/Footer/Footer";
+import { useState } from "react";
 
 function App() {
   return (

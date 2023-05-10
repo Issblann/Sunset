@@ -28,7 +28,9 @@ function Navbar() {
               </li>
 
               <li>
-                <a href="Maps">Maps</a>
+                <Link onClick={() => setOpen(!open)} to="/Maps">
+                  Maps
+                </Link>
               </li>
             </ul>
             <div>
