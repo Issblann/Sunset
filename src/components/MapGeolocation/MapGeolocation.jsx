@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -12,10 +12,10 @@ import L from "leaflet";
 import { Context } from "../../context/Context";
 
 const MapGeolocation = () => {
-  const { location, setLocation } = useContext(Context);
-  const zoom = 14;
+  const { location, setLocation, data, setData } = useContext(Context);
+  const zoom = 10;
   const coordsLocalStorage = JSON.parse(localStorage.getItem("coordenadas"));
-  console.log("coordenadas local storage", coordsLocalStorage);
+  const dataLocalStorage = JSON.parse(localStorage.getItem("weatherData"));
   const position = [location.lat, location.lon];
   const mapIcon = L.icon({
     iconUrl:
@@ -24,6 +24,7 @@ const MapGeolocation = () => {
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
   });
+
   return (
     <MapContainer
       center={coordsLocalStorage ?? position}
@@ -37,15 +38,37 @@ const MapGeolocation = () => {
       />
 
       <LayersControl position="topright">
-        <LayersControl.Overlay name="temp_new" checked>
+        <LayersControl.Overlay name="clouds_new" checked>
           <WMSTileLayer
-            url={`https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${
+            url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${
               import.meta.env.VITE_APP_API_KEY
             }`}
           />
         </LayersControl.Overlay>
       </LayersControl>
-      <Marker position={coordsLocalStorage ?? position} icon={mapIcon} />
+      <Marker position={coordsLocalStorage ?? position} icon={mapIcon}>
+        <Popup>
+          {(data ?? dataLocalStorage) && (
+            <>
+              <p>
+                {(data && data.name) ||
+                  (dataLocalStorage && dataLocalStorage.name)}
+              </p>
+              <p>
+                {((data && data.main && data.main.temp) ||
+                  (dataLocalStorage &&
+                    dataLocalStorage.main &&
+                    dataLocalStorage.main.temp)) &&
+                  parseInt(
+                    (data ? data.main.temp : dataLocalStorage.main.temp) -
+                      273.15
+                  ).toFixed(1)}
+                °C
+              </p>
+            </>
+          )}
+        </Popup>
+      </Marker>
     </MapContainer>
   );
 };

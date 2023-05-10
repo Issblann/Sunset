@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import UbicationIconCard from "../../images/weathercard/UbicationIconCard";
 import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import icons from "../../images/icons-weather/icons";
-import MapGeolocation from "../MapGeolocation/MapGeolocation";
 import "./weatherCardGeolocation.css";
 import { Context } from "../../context/Context";
 
@@ -22,10 +21,8 @@ const WeatherCardGeolocation = () => {
   const dayOfWeekString = daysOfWeek[today.getDay()];
   const monthName = today.toLocaleString("en-US", { month: "long" });
 
-  const [data, setData] = useState(null);
-  const { location, setLocation } = useContext(Context);
+  const { location, setLocation, data, setData } = useContext(Context);
 
-  console.log("location", location);
   useEffect(() => {
     const options = {
       enableHighAccuracy: true,
@@ -56,7 +53,13 @@ const WeatherCardGeolocation = () => {
           }&lon=${crd.longitude}&appid=${import.meta.env.VITE_APP_API_KEY}`
         )
         .then((res) => {
-          setData(res.data);
+          localStorage.setItem("weatherData", JSON.stringify(res.data));
+          setData(
+            res.data
+              ? res.data
+              : JSON.parse(localStorage.getItem("weatherData"))
+          );
+          // setData(res.data);
         })
 
         .catch((err) => console.log(err));
