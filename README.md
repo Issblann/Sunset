@@ -14,7 +14,7 @@
 » CSS <br>
 » React JS
 
-<h2>Screenshots of the Project 📸</h2>
+<h2>Reference figma of the project 📸</h2>
 
 <div align='center'>
 <img src='./public/Landing Page V1 Desktop.png'/>
