@@ -1,4 +1,7 @@
-<div align='center'><img style="width:30%" src='./public/SVGRepo_iconCarrier.png'/></div>
+<div align='center'>
+<div align='center'><img style="width:30%" src='./public/SVGRepo_iconCarrier.svg'/></div>
+<div align='center'><img style="width:30%" src='./public/SunSet.svg'/></div>
+</div>
 
 <h2>About the project</h2>
 
