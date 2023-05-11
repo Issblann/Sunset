@@ -49,8 +49,20 @@
 }
 .row {
   font-size: 100px;
+  animation: flotar 1.5s ease-in-out infinite;
 }
 
+@keyframes flotar {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 .container-row-paragraph p {
   color: #ffff;
 }

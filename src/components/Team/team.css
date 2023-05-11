@@ -37,6 +37,9 @@
   justify-content: center;
   gap: 30px;
 }
+.icon {
+  cursor: pointer;
+}
 
 .card-team {
   background: #ffff;

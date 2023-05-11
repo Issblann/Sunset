@@ -5,6 +5,7 @@ import UbicationIconCard from "../../images/weathercard/UbicationIconCard";
 import TemperatureIconCard from "../../images/weathercard/TemperatureIconCard";
 import Spinner from "../Spinner/Spinner";
 import icons from "../../images/icons-weather/icons";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
 
 function WeatherCard({ city }) {
   const today = new Date();
@@ -61,64 +62,77 @@ function WeatherCard({ city }) {
   return (
     <>
       <section className="section-weathercard">
-        <div className="weather-container">
-          {loading && <Spinner />}
-          {data && (
-            <>
-              <div className="date-container">
-                <div className="location-container">
-                  <UbicationIconCard />
-                  <p>
-                    {data.name},<span> {data.sys.country}</span>
-                  </p>
-                </div>
-                <div className="day-container">
-                  <h1>
-                    {monthName}, {day}
-                  </h1>
-                  <p>{dayOfWeekString}</p>
-                </div>
-              </div>
-              <div className="section-icon-description">
-                <div className="icon-container">
-                  <img src={icons[data.weather[0].icon]} alt="icono-weather" />
-                  <p>{data.weather[0].description.toUpperCase()}</p>
-                </div>
-                <div className="description-container">
-                  <div className="container-temperature">
-                    <TemperatureIconCard />
-                    <p>{parseInt(data.main.temp - 273.15).toFixed(1)} °C</p>
+        <SwitchTransition>
+          <CSSTransition
+            classNames="fade"
+            key={data}
+            addEndListener={(node, done) =>
+              node.addEventListener("transitionend", done, false)
+            }
+          >
+            <div className="weather-container">
+              {loading && <Spinner />}
+              {data && (
+                <>
+                  <div className="date-container">
+                    <div className="location-container">
+                      <UbicationIconCard />
+                      <p>
+                        {data.name},<span> {data.sys.country}</span>
+                      </p>
+                    </div>
+                    <div className="day-container">
+                      <h1>
+                        {monthName}, {day}
+                      </h1>
+                      <p>{dayOfWeekString}</p>
+                    </div>
                   </div>
+                  <div className="section-icon-description">
+                    <div className="icon-container">
+                      <img
+                        src={icons[data.weather[0].icon]}
+                        alt="icono-weather"
+                      />
+                      <p>{data.weather[0].description.toUpperCase()}</p>
+                    </div>
+                    <div className="description-container">
+                      <div className="container-temperature">
+                        <TemperatureIconCard />
+                        <p>{parseInt(data.main.temp - 273.15).toFixed(1)} °C</p>
+                      </div>
 
-                  <div className="container-min-max-humidity">
-                    <p>
-                      MIN:
-                      <span>
-                        {parseInt(data.main.temp_min - 273.15).toFixed(1)}°C
-                      </span>
-                    </p>
-                    <p>
-                      MAX:
-                      <span>
-                        {parseInt(data.main.temp_max - 273.15).toFixed(1)}°C
-                      </span>
-                    </p>
-                    <p>
-                      Humidity: <span>{data.main.humidity}%</span>
-                    </p>
+                      <div className="container-min-max-humidity">
+                        <p>
+                          MIN:
+                          <span>
+                            {parseInt(data.main.temp_min - 273.15).toFixed(1)}°C
+                          </span>
+                        </p>
+                        <p>
+                          MAX:
+                          <span>
+                            {parseInt(data.main.temp_max - 273.15).toFixed(1)}°C
+                          </span>
+                        </p>
+                        <p>
+                          Humidity: <span>{data.main.humidity}%</span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </>
-          )}
-          {!loading && !data && (
-            <>
-              <div className="title-default">
-                <h1>Ingresa una ciudad</h1>
-              </div>
-            </>
-          )}
-        </div>
+                </>
+              )}
+              {!loading && !data && (
+                <>
+                  <div className="title-default">
+                    <h1>Ingresa una ciudad</h1>
+                  </div>
+                </>
+              )}
+            </div>
+          </CSSTransition>
+        </SwitchTransition>
       </section>
     </>
   );

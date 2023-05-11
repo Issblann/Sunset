@@ -3,7 +3,6 @@ import {
   MapContainer,
   TileLayer,
   Marker,
-  Popup,
   LayersControl,
   WMSTileLayer,
 } from "react-leaflet";
@@ -15,7 +14,6 @@ const MapGeolocation = () => {
   const { location, setLocation, data, setData } = useContext(Context);
   const zoom = 10;
   const coordsLocalStorage = JSON.parse(localStorage.getItem("coordenadas"));
-  const dataLocalStorage = JSON.parse(localStorage.getItem("weatherData"));
   const position = [location.lat, location.lon];
   const mapIcon = L.icon({
     iconUrl:
@@ -46,29 +44,7 @@ const MapGeolocation = () => {
           />
         </LayersControl.Overlay>
       </LayersControl>
-      <Marker position={coordsLocalStorage ?? position} icon={mapIcon}>
-        <Popup>
-          {(data ?? dataLocalStorage) && (
-            <>
-              <p>
-                {(data && data.name) ||
-                  (dataLocalStorage && dataLocalStorage.name)}
-              </p>
-              <p>
-                {((data && data.main && data.main.temp) ||
-                  (dataLocalStorage &&
-                    dataLocalStorage.main &&
-                    dataLocalStorage.main.temp)) &&
-                  parseInt(
-                    (data ? data.main.temp : dataLocalStorage.main.temp) -
-                      273.15
-                  ).toFixed(1)}
-                °C
-              </p>
-            </>
-          )}
-        </Popup>
-      </Marker>
+      <Marker position={coordsLocalStorage ?? position} icon={mapIcon} />
     </MapContainer>
   );
 };

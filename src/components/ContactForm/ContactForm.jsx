@@ -37,8 +37,12 @@ const ContactForm = () => {
               <div className="social-links-contact">
                 <h1>Connect with us</h1>
                 <div className="icons-social-links">
-                  <img src={twitterIcon} alt="twitterIcon" />
-                  <img src={instagramIcon} alt="instagramIcon" />
+                  <img src={twitterIcon} className="icon" alt="twitterIcon" />
+                  <img
+                    src={instagramIcon}
+                    className="icon"
+                    alt="instagramIcon"
+                  />
                 </div>
               </div>
             </div>
@@ -54,7 +58,9 @@ const ContactForm = () => {
                 <span></span>
                 <input type="text" placeholder="Email" />
               </div>
-              <button type="submit">Submit</button>
+              <button type="submit" className="button">
+                Submit
+              </button>
             </form>
           </div>
         </div>

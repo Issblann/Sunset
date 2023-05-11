@@ -50,8 +50,16 @@ const TeamSection = () => {
                   </div>
                   <span className="barra-team"></span>
                   <div className="social-links-team">
-                    <img src={twitterIcon} alt="twitter icon" />
-                    <img src={instagramIcon} alt="instagram icon" />
+                    <img
+                      src={twitterIcon}
+                      className="icon"
+                      alt="twitter-icon"
+                    />
+                    <img
+                      src={instagramIcon}
+                      alt="instagram-icon"
+                      className="icon"
+                    />
                   </div>
                 </div>
               );

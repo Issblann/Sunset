@@ -19,7 +19,13 @@ const InputSearch = () => {
     <>
       <div className="search-container">
         <form onSubmit={onSubmit}>
-          <BiSearch type="submit" size="16px" color="#3C3C43" opacity="0.6" />
+          <BiSearch
+            cursor="pointer"
+            type="submit"
+            size="16px"
+            color="#3C3C43"
+            opacity="0.6"
+          />
           <input
             type="text"
             placeholder="Search"

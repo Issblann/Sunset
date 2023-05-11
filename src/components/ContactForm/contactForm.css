@@ -77,13 +77,7 @@
 .container-contact-right button {
   width: 187px;
   height: 60px;
-  color: #ffff;
-  background: var(--second-color);
-  border-radius: 20px;
-  border: none;
   text-align: center;
-  font-size: 16px;
-  font-weight: 600;
   margin-top: 10px;
 }
 
